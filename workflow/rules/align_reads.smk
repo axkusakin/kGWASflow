@@ -156,7 +156,7 @@ rule align_reads_bam_index:
         bam = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam",
         bam_sort_done = "results/align_reads_with_kmers/{phenos_filt}/bam_sort.done"
     output:
-        bai = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam.bai",
+        bai = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam.csi",
         bam_index_done = touch("results/align_reads_with_kmers/{phenos_filt}/bam_index.done")
     conda:
         "../envs/align_reads.yaml"
@@ -178,7 +178,7 @@ rule align_reads_bam_index:
 rule align_reads_bam_to_bed:
     input:
         bam = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam",
-        bai = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam.bai",
+        bai = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam.csi",
         bam_index_done = "results/align_reads_with_kmers/{phenos_filt}/bam_index.done"
     output:
         bed = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bed",
