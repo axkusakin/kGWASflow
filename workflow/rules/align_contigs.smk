@@ -93,7 +93,7 @@ rule align_contigs_bam_index:
     input:
         "results/align_contigs/{phenos_filt}/alignment/{phenos_filt}_contigs_aligned.filter.sorted.bam"
     output:
-        "results/align_contigs/{phenos_filt}/alignment/{phenos_filt}_contigs_aligned.filter.sorted.bam.bai"
+        "results/align_contigs/{phenos_filt}/alignment/{phenos_filt}_contigs_aligned.filter.sorted.bam.csi"
     conda:
         "../envs/align_contigs.yaml"
     threads:
@@ -104,7 +104,7 @@ rule align_contigs_bam_index:
         "Indexing alignment BAM files..."
     shell:
         """
-        samtools index -@ {threads} {input} 2> {log}
+        samtools index -c -m 14 -@ {threads} {input} 2> {log}
         """
 
 # =======================================================================================================
@@ -114,7 +114,7 @@ rule align_contigs_bam_index:
 rule align_contigs_bam_to_bed:
     input:
         bam="results/align_contigs/{phenos_filt}/alignment/{phenos_filt}_contigs_aligned.filter.sorted.bam",
-        bai="results/align_contigs/{phenos_filt}/alignment/{phenos_filt}_contigs_aligned.filter.sorted.bam.bai"
+        bai="results/align_contigs/{phenos_filt}/alignment/{phenos_filt}_contigs_aligned.filter.sorted.bam.csi"
     output:
         "results/align_contigs/{phenos_filt}/alignment/{phenos_filt}_contigs_aligned.filter.sorted.bed"
     conda:
