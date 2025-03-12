@@ -168,7 +168,7 @@ rule align_reads_bam_index:
         "Indexing alignment BAM files..."
     shell:
         """
-        samtools index -@ {threads} {input.bam} 2> {log}
+        samtools index -@ {threads} -c -m 14 {input.bam} 2> {log}
         """
 
 # =======================================================================================================
