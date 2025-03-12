@@ -18,7 +18,7 @@ rule align_contigs_minimap:
         "Aligning assembled contigs of reads with associated k-mers to the reference genome..."
     shell:
         """
-        minimap2 -t {threads} -a {input.ref_gen} {input.contigs} > {output} 2> {log}
+        minimap2 -t {threads} -I8g -a {input.ref_gen} {input.contigs} > {output} 2> {log}
         """
 
 # =======================================================================================================
