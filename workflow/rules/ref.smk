@@ -49,7 +49,7 @@ rule bowtie2_build:
     output:
         multiext(
             "resources/ref/genome/bowtie2_index/genome",
-            ".1.bt2", ".2.bt2", ".3.bt2", ".4.bt2", ".rev.1.bt2", ".rev.2.bt2",
+            ".1.bt2l", ".2.bt2l", ".3.bt2l", ".4.bt2l", ".rev.1.bt2l", ".rev.2.bt2l",
         ),
     log:
         "logs/ref/bowtie2_build/build.log"
