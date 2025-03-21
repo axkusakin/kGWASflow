@@ -156,7 +156,7 @@ rule align_reads_bam_index:
         bam = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam",
         bam_sort_done = "results/align_reads_with_kmers/{phenos_filt}/bam_sort.done"
     output:
-        bai = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam.bai",
+        bai = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam.csi",
         bam_index_done = touch("results/align_reads_with_kmers/{phenos_filt}/bam_index.done")
     conda:
         "../envs/align_reads.yaml"
@@ -168,7 +168,7 @@ rule align_reads_bam_index:
         "Indexing alignment BAM files..."
     shell:
         """
-        samtools index -@ {threads} {input.bam} 2> {log}
+        samtools index -@ {threads} -c -m 14 {input.bam} 2> {log}
         """
 
 # =======================================================================================================
@@ -178,7 +178,7 @@ rule align_reads_bam_index:
 rule align_reads_bam_to_bed:
     input:
         bam = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam",
-        bai = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam.bai",
+        bai = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam.csi",
         bam_index_done = "results/align_reads_with_kmers/{phenos_filt}/bam_index.done"
     output:
         bed = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bed",
@@ -227,7 +227,7 @@ rule tabix_align_reads_bed:
         bed = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.merged.bed",
         merge_bed_done = "results/align_reads_with_kmers/{phenos_filt}/merge_bed.done"
     output:
-        tbi = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.merged.bed.gz.tbi",
+        tbi = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.merged.bed.gz.csi",
         tabix_bed_done = touch("results/align_reads_with_kmers/{phenos_filt}/tabix_bed.done")
     conda:
         "../envs/align_reads.yaml"
@@ -238,7 +238,7 @@ rule tabix_align_reads_bed:
     shell:
         """
         sort -k1,1 -k2,2n {input.bed} | bgzip > {input.bed}.gz 2> {log}
-        tabix -p bed {input.bed}.gz 2> {log}
+        tabix -p bed --csi {input.bed}.gz 2> {log}
         """
 
 # =========================================================================================================

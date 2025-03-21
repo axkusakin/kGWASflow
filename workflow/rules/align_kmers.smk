@@ -103,7 +103,7 @@ rule align_kmers_bam_index:
     input:
         "results/align_kmers/{phenos_filt}/{phenos_filt}_kmers_alignment.sorted.bam"
     output:
-        "results/align_kmers/{phenos_filt}/{phenos_filt}_kmers_alignment.sorted.bam.bai"
+        "results/align_kmers/{phenos_filt}/{phenos_filt}_kmers_alignment.sorted.bam.csi"
     conda:
         "../envs/align_kmers.yaml"
     threads:
@@ -114,7 +114,7 @@ rule align_kmers_bam_index:
         "Indexing alignment BAM files..."
     shell:
         """
-        samtools index -@ {threads} {input} 2> {log}
+        samtools index -c -m 14 -@ {threads} {input} 2> {log}
         """
 
 # =================================================================================================

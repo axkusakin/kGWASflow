@@ -280,7 +280,7 @@ def aggregate_input_fetch_reads(wildcards):
 def aggregate_input_align_kmers(wildcards):
     checkpoint_output = checkpoints.fetch_significant_kmers.get(**wildcards).output[0]
     return expand([
-        "results/align_kmers/{phenos_filt}/{phenos_filt}_kmers_alignment.sorted.bam.bai",
+        "results/align_kmers/{phenos_filt}/{phenos_filt}_kmers_alignment.sorted.bam.csi",
         "results/plots/manhattan/align_kmers/{phenos_filt}/{phenos_filt}.kmers_alignment.manhattan_plot.pdf",
     ], phenos_filt=glob_wildcards(os.path.join(checkpoint_output, "{phenos_filt}_kmers_list.txt")).phenos_filt)
 

@@ -52,7 +52,7 @@ rule align_reads_igv_report:
         fasta="resources/ref/genome/genome.fasta",
         fai="resources/ref/genome/genome.fasta.fai",
         vcf="results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.merged.bed",
-        tbi = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.merged.bed.gz.tbi",
+        tbi = "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.merged.bed.gz.csi",
         tracks= [
             get_genome_annotation(),
             "results/align_reads_with_kmers/{phenos_filt}/{phenos_filt}.align_reads_with_kmers.filter.sorted.bam",
